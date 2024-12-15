@@ -21,7 +21,7 @@
             <label for="password">Password:</label>
             <input type="password" name="password" id="password" placeholder="*******" required>
             
-            <button type="submit"  formaction="{% url 'login:signup' %}">login</button>
+            <button type="submit"  formaction="{% url 'login:login' %}">login</button>
            <div>Don't have an account? <a style="font-weight: bold;" href="{% url 'login:signupPage' %}" class="btn"> Signup</a></div>
         </form>
     </div>
