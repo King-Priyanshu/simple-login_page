@@ -16,15 +16,23 @@ def signup(request):
         email = request.POST['email']
         password = request.POST['password']
 
-        # Save the new user
-        user = User(username=username, email=email, password=password)
-        user.save()
+        try:
+            user = User.objects.get(email=email)
+            pop={
+                'note': 'email alrady exist'
+            }
+            return render(request, 'signup.html',pop)
 
-        # Redirect to login page after signup
-        return redirect(reverse('login.html'))  # Update with actual login view name
+        except :
+             user = User(username=username, email=email, password=password)   
+             user.save()
+             return render(request,'login.html')
+        
 
 
-# Login logic
+
+
+
 def login(request):
     if request.method == 'POST':
         email = request.POST['email']
