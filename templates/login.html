@@ -8,14 +8,21 @@
     <title>Signup</title>
 </head>
 <body>
+    <script>
+        {% if note %}
+        alert("{{note}}");
+        {% endif %}
+    </script>
     <div class="container">
         <h1>Login</h1>
     <div >
+       
         <!-- Include the CSRF token -->
         <form action="" style="" class="form" method="post">
             {% csrf_token %}
             
             <label for="email">Email:</label>
+
             <input type="email" name="email" id="email" placeholder="Enter your email address" required>
             
             <label for="password">Password:</label>
