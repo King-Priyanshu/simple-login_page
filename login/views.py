@@ -30,18 +30,25 @@ def login(request):
         email = request.POST['email']
         password = request.POST['password']
         if email and password:
+            try:
                 user = User.objects.get(email=email)
-                if user == None:
-                     return render(request, 'login.html')
+                if user.password == password:
+                    d = {
+                        'email': user.email,
+                        'username': user.username,
+                    }
+                    return render(request, 'home.html', d)
                 else:
+                    pop={
+                    'note': 'Wrong Password'
+                }
+                    return render(request, 'login.html',pop)  # Password incorrect
+            except User.DoesNotExist:
+                pop={
+                    'note': 'Email not found'
+                }
+                return render(request, 'login.html',pop)  # User does not exist
 
-                    if user.password == password:
-                        d={'email': user.email,
-                        'username': user.username,}
-                        return render(request, 'home.html',d)
-                        
-                    elif user.password != password:
-                        return render(request, 'login.html')
 
                     
                     
