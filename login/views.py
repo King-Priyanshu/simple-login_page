@@ -15,19 +15,21 @@ def signup(request):
         username = request.POST['username']
         email = request.POST['email']
         password = request.POST['password']
+        if email and username and password:
+            try:
+                user = User.objects.get(email=email)
+                pop={
+                    'note': 'email alrady exist'
+                }
+                return render(request, 'signup.html',pop)
+                
+            except :
+                user = User(username=username, email=email, password=password)   
+                user.save()
+                return render(request,'login.html')
+            
+            
 
-        try:
-            user = User.objects.get(email=email)
-            pop={
-                'note': 'email alrady exist'
-            }
-            return render(request, 'signup.html',pop)
-
-        except :
-             user = User(username=username, email=email, password=password)   
-             user.save()
-             return render(request,'login.html')
-        
 
 
 
