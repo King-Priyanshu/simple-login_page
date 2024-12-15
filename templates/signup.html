@@ -11,6 +11,11 @@
     <div class="container">
       <h1>Signup</h1>
     <div >
+        <script>
+            {% if note %}
+            alert("{{note}}")
+            {% endif %}
+        </script>
         <!-- Include the CSRF token -->
         <form action="" style="" class="form" method="post">
             {% csrf_token %}
